@@ -1,13 +1,29 @@
 <template>
   <div id="app">
-    <button class="btn">btn</button>
+    <component :is="layout">
+      <router-view />
+    </component>
+    
   </div>
 </template>
 
 <script>
 
+import EnterLayout from '@/layouts/EnterLayout'
+import AppLayout from '@/layouts/AppLayout'
+
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    layout() {
+      console.log(this.$route.meta)
+      return (this.$route.meta.layout || 'enter') + '-layout'
+    }
+  },
+  components: {
+    EnterLayout,
+    AppLayout
+  }
 }
 </script>
 
